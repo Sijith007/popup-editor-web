@@ -30,11 +30,11 @@ export default {
       isEditing: false,
       showModal: true,
       settings: {
-        bgColor: "#e85e5b",
-        title: "A sample title for your popup",
-        infoText: "Information text here",
-        fieldName: "Input field",
-        buttonText: "Button Text",
+        bgColor: 'transparent', // '#e85e5b',
+        title: '',
+        infoText: '',
+        fieldName: '',
+        buttonText: '',
         popupItems: [
           { id: 1, name: "star icons" },
           { id: 2, name: "title text" },
