@@ -19,6 +19,7 @@ import axios from 'axios'
 import Vue from 'vue';
 import PopupEditor from './../plugins/popupEditor';
 import CustomPopupContent from "../components/CustomPopupContent";
+import ENV from "./../dev.env";
 
 Vue.use(PopupEditor);
 
@@ -49,7 +50,7 @@ export default {
   },
   methods: {
     getPopup: function() {
-      axios.get('http://localhost:8000/api/popups/1')
+      axios.get(`${ENV.VUE_APP_BASE_URL}popups/1`)
       .then((result) => {
         this.settings = result.data[0];
       })

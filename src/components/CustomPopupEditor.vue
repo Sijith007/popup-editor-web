@@ -77,6 +77,7 @@
 import Vue from 'vue';
 import axios from 'axios'
 import CustomPopupContent from "../components/CustomPopupContent.vue";
+import ENV from "./../dev.env";
 
 export default {
   name: "custom-popup-editor",
@@ -102,7 +103,7 @@ export default {
   },
   methods: {
     getPopup: function() {
-      axios.get('http://localhost:8000/api/popups/1')
+      axios.get(`${ENV.VUE_APP_BASE_URL}popups/1`)
       .then((result) => {
         this.settings = result.data[0];
       })
@@ -115,7 +116,7 @@ export default {
         this.settings.fieldName &&
         this.settings.buttonText) {
         const params = { ...this.settings };
-        axios.put('http://localhost:8000/api/popups/1', params)
+        axios.put(`${ENV.VUE_APP_BASE_URL}popups/1`, params)
         .then((result) => {
           if (result) {
             instance = Vue.$toast.open({
