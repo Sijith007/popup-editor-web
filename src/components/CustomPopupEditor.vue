@@ -57,7 +57,7 @@
 
         <div class="btn-container">
           <base-button type="primary" block class="mb-3" @click="save()"
-            >Save</base-button
+            >{{ isSaving ? 'Please wait...' : 'Save' }}</base-button
           >
           <!-- <base-button type="primary" block class="mb-3" @click="showModal = true"
             >Preview</base-button
@@ -83,13 +83,14 @@ export default {
   name: "custom-popup-editor",
   data() {
     return {
+      isSaving: false,
       showModal: true,
       settings: {
-        bgColor: '#e85e5b',
-        title: 'A sample title for your popup',
-        infoText: 'Information text here',
-        fieldName: 'Input field',
-        buttonText: 'Button Text',
+        bgColor: 'transparent', // '#e85e5b',
+        title: '',
+        infoText: '',
+        fieldName: '',
+        buttonText: '',
         popupItems: [
           { id: 1, name: "star icons" },
           { id: 2, name: "title text" },
@@ -120,35 +121,46 @@ export default {
       })
     },
     save: function() {
-      let instance;
-      if (this.settings.bgColor &&
+      if (this.isSaving) {
+        const savingInstance = Vue.$toast.open({
+          message: 'Update in progress. Please wait!',
+          type: 'warning',
+          position: 'top-right',
+        });
+        setTimeout(() => {
+          savingInstance.dismiss();
+        }, 2000);
+      } else if (
+        this.settings.bgColor &&
         this.settings.title &&
         this.settings.infoText &&
         this.settings.fieldName &&
         this.settings.buttonText) {
+          this.isSaving = true;
         const params = { ...this.settings, name: 'popup' };
         params.items = JSON.stringify(params.popupItems);
         axios.put(`${ENV.VUE_APP_BASE_URL}popups/1`, params)
         .then((result) => {
+          this.isSaving = false;
           if (result) {
-            instance = Vue.$toast.open({
+            const successInstance = Vue.$toast.open({
               message: 'Popup template saved successfully',
               type: 'success',
               position: 'top-right',
             });
             setTimeout(() => {
-              instance.dismiss();
+              successInstance.dismiss();
             }, 2000);
           }
         })
       } else {
-        instance = Vue.$toast.open({
+        const errorInstance = Vue.$toast.open({
           message: 'Please fill all the required fields',
           type: 'error',
           position: 'top-right',
         });
         setTimeout(() => {
-          instance.dismiss();
+          errorInstance.dismiss();
         }, 2000);
       }
       
