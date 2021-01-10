@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build:custom-popup": "vue-cli-service build --target wc --name custom-popup ./src/main.js",
-    "build:wc": "vue-cli-service build --target wc --name popup-components --enable-shadow-dom false ./src/components/CustomPopup.vue"
+    "build:wc": "vue-cli-service build --target wc --name popup-component --enable-shadow-dom false ./src/components/CustomPopup.vue"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",

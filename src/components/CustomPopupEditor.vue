@@ -1,5 +1,5 @@
 <template>
-  <div class="popup container">
+  <div class="popup container ms-p-0">
     <div class="row">
       <div class="col-md-4">
         <div class="field-item">
@@ -64,7 +64,7 @@
           > -->
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8 ms-p-0">
         <modal :show="showModal" size="sm" body-classes="p-0" :modal-content-styles="{backgroundColor: settings.bgColor}">
           <custom-popup-content :settings="settings"></custom-popup-content>
         </modal>
@@ -185,5 +185,10 @@ h1 {
 .modal {
   position: relative;
   z-index: 1;
+}
+@media (max-width: 762px) {
+  .ms-p-0 {
+    padding: 0 !important;
+  }
 }
 </style>
