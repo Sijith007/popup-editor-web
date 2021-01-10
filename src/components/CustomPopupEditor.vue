@@ -173,6 +173,9 @@ export default {
 h1 {
   margin: 40px 0 0;
 }
+label {
+  color: #000000;
+}
 .field-item {
   display: flex;
   flex-direction: column;
