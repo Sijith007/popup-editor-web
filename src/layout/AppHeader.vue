@@ -34,7 +34,7 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style scoped lang="css">
 .navbar {
   transition: all 0.4s;
 }
