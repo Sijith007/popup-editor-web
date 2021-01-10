@@ -90,6 +90,13 @@ export default {
         infoText: 'Information text here',
         fieldName: 'Input field',
         buttonText: 'Button Text',
+        popupItems: [
+          { id: 1, name: "star icons" },
+          { id: 2, name: "title text" },
+          { id: 3, name: "input field" },
+          { id: 4, name: "button" },
+          { id: 5, name: "info text" },
+        ]
       },
     };
   },
@@ -105,7 +112,11 @@ export default {
     getPopup: function() {
       axios.get(`${ENV.VUE_APP_BASE_URL}popups/1`)
       .then((result) => {
-        this.settings = result.data[0];
+        const data = result.data[0];
+        if (data) {
+          data.popupItems = JSON.parse(data.items);
+          this.settings = data; 
+        }
       })
     },
     save: function() {
@@ -115,7 +126,8 @@ export default {
         this.settings.infoText &&
         this.settings.fieldName &&
         this.settings.buttonText) {
-        const params = { ...this.settings };
+        const params = { ...this.settings, name: 'popup' };
+        params.items = JSON.stringify(params.popupItems);
         axios.put(`${ENV.VUE_APP_BASE_URL}popups/1`, params)
         .then((result) => {
           if (result) {

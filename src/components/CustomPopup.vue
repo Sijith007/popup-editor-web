@@ -35,6 +35,13 @@ export default {
         infoText: "Information text here",
         fieldName: "Input field",
         buttonText: "Button Text",
+        popupItems: [
+          { id: 1, name: "star icons" },
+          { id: 2, name: "title text" },
+          { id: 3, name: "input field" },
+          { id: 4, name: "button" },
+          { id: 5, name: "info text" },
+        ]
       },
     };
   },
@@ -52,7 +59,11 @@ export default {
     getPopup: function() {
       axios.get(`${ENV.VUE_APP_BASE_URL}popups/1`)
       .then((result) => {
-        this.settings = result.data[0];
+        const data = result.data[0];
+        if (data) {
+          data.popupItems = JSON.parse(data.items);
+          this.settings = data; 
+        }
       })
     }
   }

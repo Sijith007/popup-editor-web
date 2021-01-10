@@ -9,7 +9,7 @@
       <form role="form">
         <draggable
           class="draggable-items"
-          v-model="popupItems"
+          v-model="settings.popupItems"
           :options="{disabled: !isEditing}"
           group="items"
           @start="drag = true"
@@ -17,7 +17,7 @@
         >
           <!-- <div :key="element.id">{{element.name}}</div> -->
           <!-- icons -->
-          <div v-for="element in popupItems" :key="element.id">
+          <div v-for="element in settings.popupItems" :key="element.id">
             <div class="icons" v-if="element.id === 1">
               <font-awesome-icon icon="star" />
               <font-awesome-icon icon="star" />
@@ -86,6 +86,13 @@ export default {
           infoText: "Information text here",
           fieldName: "Input field",
           buttonText: "Button Text",
+          popupItems: [
+            { id: 1, name: "star icons" },
+            { id: 2, name: "title text" },
+            { id: 3, name: "input field" },
+            { id: 4, name: "button" },
+            { id: 5, name: "info text" },
+          ]
         };
       },
     },
@@ -97,13 +104,6 @@ export default {
   },
   data() {
     return {
-      popupItems: [
-        { id: 1, name: "star icons" },
-        { id: 2, name: "title text" },
-        { id: 3, name: "input field" },
-        { id: 4, name: "button" },
-        { id: 5, name: "info text" },
-      ],
       showModal: false,
       inputField: "",
     };
