@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       isEditing: false,
-      showModal: true,
+      showModal: false,
       settings: {
         bgColor: 'transparent', // '#e85e5b',
         title: '',
