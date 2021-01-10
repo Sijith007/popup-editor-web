@@ -6,27 +6,6 @@
         <a href="#" class="navbar-brand text-uppercase font-weight-bold"
           >Popup Editor APP</a
         >
-        <!-- <button
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          class="navbar-toggler navbar-toggler-right"
-        >
-          <i class="fa fa-bars"></i>
-        </button>
-
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a :href="'/#/feed-list'" class="nav-link text-uppercase font-weight-bold"
-                >Feeds <span class="sr-only">(current)</span></a
-              >
-            </li>
-          </ul>
-        </div> -->
       </div>
     </nav>
   </header>
@@ -35,7 +14,7 @@
 export default {
   data() {
     return {
-      highlightNav: true,
+      highlightNav: false,
     }
   },
   created () {
@@ -46,7 +25,7 @@ export default {
   },
   methods: {
     handleScroll (event) {
-      if (event.target.scrollingElement.scrollTop > 10 ) {
+      if (event.target.scrollingElement.scrollTop > 20 ) {
         this.highlightNav = true;
       } else {
         this.highlightNav = false;

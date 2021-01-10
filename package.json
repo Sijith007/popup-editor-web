@@ -7,12 +7,13 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build:custom-popup": "vue-cli-service build --target wc --name custom-popup ./src/main.js",
-    "build:wc": "vue-cli-service build --target wc --name popup-components ./src/components/*.vue"
+    "build:wc": "vue-cli-service build --target wc --name popup-components --enable-shadow-dom false ./src/components/CustomPopup.vue"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/vue-fontawesome": "^2.0.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "node-sass": "^5.0.0",
@@ -22,6 +23,7 @@
     "vue-clipboard2": "^0.3.1",
     "vue-native-color-picker": "^1.1.3",
     "vue-router": "^3.4.9",
+    "vue-toast-notification": "^0.6.0",
     "vue2-transitions": "^0.3.0",
     "vuedraggable": "^2.24.3"
   },

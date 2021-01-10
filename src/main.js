@@ -4,14 +4,11 @@ import PopupEditor from './plugins/popupEditor';
 import wrap from '@vue/web-component-wrapper';
 import CustomPopup from './components/CustomPopup';
 import router from './router';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
-library.add(faStar)
-
-Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.use(PopupEditor);
+Vue.use(VueToast);
 
 Vue.config.productionTip = false;
 

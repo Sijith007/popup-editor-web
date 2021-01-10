@@ -56,7 +56,7 @@
         </div>
 
         <div class="btn-container">
-          <base-button type="primary" block class="mb-3"
+          <base-button type="primary" block class="mb-3" @click="save()"
             >Save</base-button
           >
           <!-- <base-button type="primary" block class="mb-3" @click="showModal = true"
@@ -74,6 +74,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import axios from 'axios'
 import CustomPopupContent from "../components/CustomPopupContent.vue";
 
 export default {
@@ -93,6 +95,52 @@ export default {
   components: {
     CustomPopupContent,
   },
+  mounted() {
+    if (!this.isEditing) {
+      this.getPopup()
+    }
+  },
+  methods: {
+    getPopup: function() {
+      axios.get('http://localhost:8000/api/popups/1')
+      .then((result) => {
+        this.settings = result.data[0];
+      })
+    },
+    save: function() {
+      let instance;
+      if (this.settings.bgColor &&
+        this.settings.title &&
+        this.settings.infoText &&
+        this.settings.fieldName &&
+        this.settings.buttonText) {
+        const params = { ...this.settings };
+        axios.put('http://localhost:8000/api/popups/1', params)
+        .then((result) => {
+          if (result) {
+            instance = Vue.$toast.open({
+              message: 'Popup template saved successfully',
+              type: 'success',
+              position: 'top-right',
+            });
+            setTimeout(() => {
+              instance.dismiss();
+            }, 2000);
+          }
+        })
+      } else {
+        instance = Vue.$toast.open({
+          message: 'Please fill all the required fields',
+          type: 'error',
+          position: 'top-right',
+        });
+        setTimeout(() => {
+          instance.dismiss();
+        }, 2000);
+      }
+      
+    }
+  }
 };
 </script>
 

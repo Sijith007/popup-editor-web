@@ -2,7 +2,7 @@
   <!-- <div class="popup"> -->
   <card
     body-classes="px-lg-5 py-lg-5"
-    class="popup-card editable mb-0"
+    class="popup-card mb-0"
     v-bind:class="isEditing ? 'editable' : ''"
   >
     <template>
@@ -10,7 +10,8 @@
         <draggable
           class="draggable-items"
           v-model="popupItems"
-          group="people"
+          :options="{disabled: !isEditing}"
+          group="items"
           @start="drag = true"
           @end="drag = false"
         >
@@ -35,7 +36,7 @@
             >
             </base-input>
 
-            <base-button v-if="element.id === 4" type="primary" class="my-4">{{
+            <base-button v-if="element.id === 4 && settings.buttonText" type="primary" class="my-4">{{
               settings.buttonText
             }}</base-button>
 
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-// import Vue from 'vue';
+import Vue from 'vue';
 // import InputColorPicker from "vue-native-color-picker";
 import draggable from "vuedraggable";
 // import PopupEditor from './../plugins/popupEditor';
@@ -60,19 +61,21 @@ import draggable from "vuedraggable";
 
 // Vue.use(PopupEditor);
 // Vue.use(InputColorPicker);
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faStar)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 export default {
   name: "custom-popup-content",
   components: {
     draggable,
-    // Card,
-    // BaseButton,
-    // BaseInput,
   },
   options: {
     props: {}
   },
-  // props: {},
   props: {
     settings: {
       type: Object,
@@ -86,16 +89,14 @@ export default {
         };
       },
     },
+
+    isEditing: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
-      // settings: {
-      //   bgColor: "#e85e5b",
-      //   title: "A sample title for your popup",
-      //   infoText: "Information text here",
-      //   fieldName: "Input field",
-      //   buttonText: "Button Text",
-      // },
       popupItems: [
         { id: 1, name: "star icons" },
         { id: 2, name: "title text" },
@@ -105,20 +106,19 @@ export default {
       ],
       showModal: false,
       inputField: "",
-      isEditing: true,
     };
   },
 };
 </script>
 
 <style>
-.popup-card {
+.card.popup-card {
   border: none;
   height: 80%;
   width: 65%;
   background-color: transparent;
 }
-form {
+.card.popup-card form {
   color: #fff;
   width: 100%;
   height: 100%;
@@ -128,7 +128,7 @@ form {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.draggable-items {
+.card.popup-card .draggable-items {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -137,13 +137,13 @@ form {
   width: 100%;
   height: 100%;
 }
-.draggable-items > div {
+.card.popup-card .draggable-items > div {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.icons {
+.card.popup-card .icons {
   display: flex;
   width: 120px;
   justify-content: space-between;
@@ -152,44 +152,54 @@ form {
   align-items: flex-end;
   color: #cb3735;
 }
-.icons svg:nth-child(2) {
+.card.popup-card .icons svg {
+  width: 22px;
+}
+.card.popup-card .icons svg:nth-child(2) {
   align-self: flex-start;
   font-size: 36px;
+  width: 36px;
 }
-h1 {
+.card.popup-card h1 {
   color: #fff;
   text-align: center;
   text-transform: uppercase;
+  margin: 0;
 }
-.form-field {
+.card.popup-card .form-field {
   width: 100%;
   margin: 0 !important;
 }
-button {
+.card.popup-card button {
   width: 100%;
   margin: 0 !important;
 }
-P {
+.card.popup-card P {
   text-align: center;
+  margin: 0;
 }
 
 @media (max-width: 762px) {
-  .popup-card {
+  .card.popup-card {
     width: 80%;
     height: 90%;
   }
-  .icons {
+  .card.popup-card .icons {
     width: 50px;
     font-size: 10px;
     height: 20px;
   }
-  .icons svg:nth-child(2) {
+  .card.popup-card .icons svg {
+    width: 10px;
+  }
+  .card.popup-card .icons svg:nth-child(2) {
+    width: 15px;
     font-size: 15px;
   }
-  h1 {
+  .card.popup-card h1 {
     font-size: 12px;
   }
-  p {
+  .card.popup-card p {
     font-size: 10px;
   }
 }
