@@ -265,19 +265,20 @@ export default {
       }
       return element;
     },
-    getModalContainer() {
-      let element = document.querySelector('.modal-content');
+    getModalDialog() {
+      let element = document.querySelector('.modal-dialog');
       if (!element) {
-        element = document.querySelector('popup-component').shadowRoot.querySelector('.modal-content');
+        element = document.querySelector('popup-component').shadowRoot.querySelector('.modal-dialog');
       }
       return element;
     },
     setModalContent() {
-      const container = this.getModalContainer();
-      if (container) {
-        const size = Math.min(container.clientWidth, container.clientHeight, 576);
-        container.style.width = `${size}px`;
-        container.style.height = `${size}px`;
+      const dialog = this.getModalDialog();
+      if (dialog) {
+        const size = Math.min(dialog.clientWidth, dialog.clientHeight, 576);
+        const content = dialog.querySelector('.modal-content');
+        content.style.width = `${size}px`;
+        content.style.height = `${size}px`;
       }
     },
     initPopupSettings() {
@@ -347,6 +348,7 @@ export default {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    font-family: sans-serif;
   }
   .popup-container button {
     width: 100%;
