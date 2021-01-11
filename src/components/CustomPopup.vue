@@ -1,8 +1,5 @@
 <template>
   <div>
-    <base-button type="primary" block class="mb-3" @click="showModal = true"
-      >Preview</base-button
-    >
     <modal
       :show.sync="showModal"
       size="sm"
@@ -28,20 +25,16 @@ export default {
   data() {
     return {
       isEditing: false,
-      showModal: false,
+      showModal: true,
       settings: {
         bgColor: 'transparent', // '#e85e5b',
         title: '',
         infoText: '',
         fieldName: '',
         buttonText: '',
-        popupItems: [
-          { id: 1, name: "star icons" },
-          { id: 2, name: "title text" },
-          { id: 3, name: "input field" },
-          { id: 4, name: "button" },
-          { id: 5, name: "info text" },
-        ]
+        containerWidth: 576,
+        containerHeight: 576,
+        elements: []
       },
     };
   },
@@ -51,9 +44,7 @@ export default {
   props: [],
   
   mounted() {
-    if (!this.isEditing) {
-      this.getPopup()
-    }
+    this.getPopup()
   },
   methods: {
     getPopup: function() {
@@ -61,8 +52,10 @@ export default {
       .then((result) => {
         const data = result.data[0];
         if (data) {
-          data.popupItems = JSON.parse(data.items);
-          this.settings = data; 
+          data.containerWidth = parseInt(data.containerWidth, 10)
+          data.containerHeight = parseInt(data.containerHeight, 10)
+          data.elements = JSON.parse(data.items);
+          this.settings = data;
         }
       })
     }

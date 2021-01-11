@@ -91,13 +91,9 @@ export default {
         infoText: '',
         fieldName: '',
         buttonText: '',
-        popupItems: [
-          { id: 1, name: "star icons" },
-          { id: 2, name: "title text" },
-          { id: 3, name: "input field" },
-          { id: 4, name: "button" },
-          { id: 5, name: "info text" },
-        ]
+        containerWidth: 576,
+        containerHeight: 576,
+        elements: []
       },
     };
   },
@@ -115,8 +111,10 @@ export default {
       .then((result) => {
         const data = result.data[0];
         if (data) {
-          data.popupItems = JSON.parse(data.items);
-          this.settings = data; 
+          data.containerWidth = parseInt(data.containerWidth, 10)
+          data.containerHeight = parseInt(data.containerHeight, 10)
+          data.elements = JSON.parse(data.items);
+          this.settings = data;
         }
       })
     },
@@ -138,7 +136,7 @@ export default {
         this.settings.buttonText) {
           this.isSaving = true;
         const params = { ...this.settings, name: 'popup' };
-        params.items = JSON.stringify(params.popupItems);
+        params.items = JSON.stringify(params.elements);
         axios.put(`${ENV.VUE_APP_BASE_URL}popups/1`, params)
         .then((result) => {
           this.isSaving = false;

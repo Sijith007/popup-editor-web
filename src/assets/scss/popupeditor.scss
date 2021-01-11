@@ -75,3 +75,9 @@
 .editable .draggable-items > div p {
   cursor: move !important;
 }
+
+.vdr, .vdr.active:before {
+  position: absolute;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
