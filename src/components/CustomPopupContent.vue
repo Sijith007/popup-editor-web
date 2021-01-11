@@ -305,14 +305,15 @@ export default {
           }
         });
 
-        this.s1Size = 22 * wRatio;
-        this.s2Size = 36 * wRatio;
-        this.h1Size = 26 * wRatio;
-        this.iSize = 16 * wRatio;
-        this.bSize = 16 * wRatio;
-        this.pSize = 14 * wRatio;
-        this.iWidth = 120 * wRatio;
-        this.iHeight = 42 * hRatio;
+        const sizeRatio = width/576;
+        this.s1Size = 22 * sizeRatio;
+        this.s2Size = 36 * sizeRatio;
+        this.h1Size = 26 * sizeRatio;
+        this.iSize = 16 * sizeRatio;
+        this.bSize = 16 * sizeRatio;
+        this.pSize = 14 * sizeRatio;
+        this.iWidth = 120 * sizeRatio;
+        this.iHeight = 42 * sizeRatio;
 
         this.settings.containerWidth = width;
         this.settings.containerHeight = height;
