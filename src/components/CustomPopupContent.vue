@@ -236,9 +236,12 @@ export default {
 
   mounted() {
     this.initPopupSettings();
-    // window.addEventListener('resize', ()=>{
-    //   this.initPopupSettings(listEl.clientWidth, listEl.clientHeight);
-    // })
+    window.addEventListener('resize', ()=>{
+      clearTimeout(window.resizedFinished);
+      window.resizedFinished = setTimeout(() => {
+        this.initPopupSettings();
+      }, 250);
+    })
   },
 
   data() {
@@ -271,9 +274,11 @@ export default {
     },
     setModalContent() {
       const container = this.getModalContainer();
-      const size = Math.min(container.clientWidth, container.clientHeight, 576);
-      container.style.width = `${size}px`;
-      container.style.height = `${size}px`;
+      if (container) {
+        const size = Math.min(container.clientWidth, container.clientHeight, 576);
+        container.style.width = `${size}px`;
+        container.style.height = `${size}px`;
+      }
     },
     initPopupSettings() {
       this.setModalContent();
