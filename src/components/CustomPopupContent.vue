@@ -231,7 +231,7 @@ export default {
     setModalContent() {
       const dialog = this.getElement('.modal-dialog');
       if (dialog) {
-        const size = Math.min(dialog.clientWidth, dialog.clientHeight, 576);
+        const size = Math.min(dialog.clientWidth, 576);
         const content = dialog.querySelector('.modal-content');
         content.style.width = `${size}px`;
         content.style.height = `${size}px`;

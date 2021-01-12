@@ -58,6 +58,7 @@
 
           <div class="btn-container">
             <base-button type="primary" block class="mb-3" @click="save()"
+              :disabled='!showModal'
               >{{ isSaving ? 'Please wait...' : 'Save' }}</base-button
             >
           </div>
