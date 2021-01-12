@@ -12,22 +12,28 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Vue from 'vue';
 import PopupEditor from './../plugins/popupEditor';
 import CustomPopupContent from "../components/CustomPopupContent";
-import ENV from "./../dev.env";
+import PopupService from './../services/popup'
 
 Vue.use(PopupEditor);
 
 export default {
   name: "CustomPopup",
+
+  components: {
+    CustomPopupContent,
+  },
+
+  props: [],
+
   data() {
     return {
       isEditing: false,
       showModal: true,
       settings: {
-        bgColor: 'transparent', // '#e85e5b',
+        bgColor: 'transparent',
         title: '',
         infoText: '',
         fieldName: '',
@@ -38,26 +44,17 @@ export default {
       },
     };
   },
-  components: {
-    CustomPopupContent,
-  },
-  props: [],
   
   mounted() {
     this.getPopup()
   },
+
   methods: {
+    /**
+     * @description To get the saved popup properties.
+     */
     getPopup: function() {
-      axios.get(`${ENV.VUE_APP_BASE_URL}popups/1`)
-      .then((result) => {
-        const data = result.data[0];
-        if (data) {
-          data.containerWidth = parseInt(data.containerWidth, 10)
-          data.containerHeight = parseInt(data.containerHeight, 10)
-          data.elements = JSON.parse(data.items);
-          this.settings = data;
-        }
-      })
+      PopupService.getPopup().then((data) => this.settings = data)
     }
   }
 };
