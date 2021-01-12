@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       isEditing: false,
-      showModal: true,
+      showModal: false,
       settings: {
         bgColor: 'transparent',
         title: '',
@@ -54,7 +54,10 @@ export default {
      * @description To get the saved popup properties.
      */
     getPopup: function() {
-      PopupService.getPopup().then((data) => this.settings = data)
+      PopupService.getPopup().then((data) => {
+        this.settings = data;
+        this.showModal = true;
+      });
     }
   }
 };

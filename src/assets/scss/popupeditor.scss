@@ -81,3 +81,8 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.popup-container .vdr > .form-group,
+.popup-container .vdr > input {
+  position: absolute;
+}

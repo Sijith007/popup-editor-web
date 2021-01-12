@@ -91,7 +91,7 @@ export default {
   data() {
     return {
       isSaving: false,
-      showModal: true,
+      showModal: false,
       settings: {
         bgColor: 'transparent',
         title: '',
@@ -121,7 +121,10 @@ export default {
      * @description To get popup properties.
      */
     getPopup: function() {
-      PopupService.getPopup().then((data) => this.settings = data)
+      PopupService.getPopup().then((data) => {
+        this.settings = data;
+        this.showModal = true;
+      });
     },
 
     /**

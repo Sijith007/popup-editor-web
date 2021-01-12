@@ -33,11 +33,12 @@
 
       <base-input
         alternative
-        class="mb-3 form-field"
+        class="form-field"
         :placeholder="settings.fieldName"
-        prepend-icon="ni ni-email-83"
         v-if="index === 2"
-         :style="{ fontSize: iSize + 'px' }"
+        @click="focusInput()"
+        v-model="inputData"
+        :style="{ fontSize: iSize + 'px' }"
       >
       </base-input>
 
@@ -197,6 +198,8 @@ export default {
       iSize: 16,
       bSize: 16,
       pSize: 14,
+
+      inputData: '',
     };
   },
 
@@ -276,7 +279,12 @@ export default {
     },
 
     activateEv(index) {
-      this.settings.elements[index  ].active = true;
+      this.settings.elements[index].active = true;
+    },
+
+    focusInput() {
+      console.log('clicked input')
+      setTimeout(() => {this.getElement('.modal-content input').focus()}, 100);
     },
 
     deactivateEv(index) {
