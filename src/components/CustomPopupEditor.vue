@@ -67,6 +67,7 @@
         <modal :show="showModal" size="sm" body-classes="p-0" :modal-content-styles="{backgroundColor: settings.bgColor}">
           <custom-popup-content :settings="settings"></custom-popup-content>
         </modal>
+        <div class="coming-soon">Please wait... Popup will load soon</div>
       </div>
     </div>
     <div class="row">
@@ -222,6 +223,15 @@ label {
 }
 .btn-container button:nth-child(2) {
   margin: 0 0 0 8px; 
+}
+.coming-soon {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #cdcdcd;
 }
 .modal {
   position: relative;
