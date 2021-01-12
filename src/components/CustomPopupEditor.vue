@@ -67,7 +67,7 @@
         <modal :show="showModal" size="sm" body-classes="p-0" :modal-content-styles="{backgroundColor: settings.bgColor}">
           <custom-popup-content :settings="settings"></custom-popup-content>
         </modal>
-        <div class="coming-soon">Please wait... Popup will load soon</div>
+        <div v-if="!showModal" class="coming-soon">Please wait... Popup will load soon</div>
       </div>
     </div>
     <div class="row">
