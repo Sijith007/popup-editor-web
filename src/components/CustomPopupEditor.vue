@@ -236,6 +236,7 @@ label {
     background: #f6f6f6;
     border-radius: 4px;
     display: flex;
+	color: #b75501;
 }
 @media (max-width: 762px) {
   .ms-p-0 {
